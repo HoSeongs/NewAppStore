@@ -8,6 +8,8 @@
 
 import UIKit
 
+let APP_INFO_URL = "https://itunes.apple.com/lookup?id=839333328&country=kr"
+
 class AppInfoViewController: UIViewController {
     
     var appInfo:Entry?
