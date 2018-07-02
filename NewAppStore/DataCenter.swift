@@ -202,7 +202,7 @@ struct ImageDictionary{
 //앱 상세정보 설정 ============================================================
 struct AppInfo:Decodable{
     let resultCount:Int?
-    //let result:
+    let result:[Result]?
     
     
     
@@ -252,7 +252,7 @@ struct Result:Decodable{
     let sellerName:String?
     let isVppDeviceBasedLicensingEnabled:Bool?
     let averageUserRating:Float?
-    let userRatingCount:Float?
+    let userRatingCount:Int?
 }
 //{
 //    "resultCount":1,

@@ -57,7 +57,7 @@ class AppListViewController: UIViewController {
         if segue.identifier == "selectedSegue"{
             print("selectedSegue")
             if let destination = segue.destination as? AppInfoViewController,let selectedRow = self.appListTableView.indexPathForSelectedRow?.row, let selectedAppInfo = AppList?.feed?.entry?[selectedRow]{
-                destination.appInfo = selectedAppInfo
+                destination.selectApp = selectedAppInfo
             }
         }
     }
