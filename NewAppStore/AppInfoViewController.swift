@@ -29,15 +29,15 @@ class AppInfoViewController: UIViewController {
         
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, err) -> Void in
             guard let data = data else {
-    
+                print("오류 발생")
                 return
             }
             
             do{
                 self.appInfoData = try JSONDecoder().decode(AppInfo.self, from: data)
-                print("appInfo \(self.appInfoData)")
+                self.setData()
             }catch let error{
-                
+                print(error.localizedDescription)
             }
             
             
@@ -48,6 +48,19 @@ class AppInfoViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setData(){
+        
+        if (self.appInfoData == nil){
+            return
+        }
+        
+        
+        
+        
+        
+        
     }
     
 
