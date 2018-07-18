@@ -15,6 +15,24 @@ class AppInfoViewController: UIViewController {
     var selectApp:Entry?
     var appInfoData:AppInfo?
 
+    @IBOutlet weak var appImage: UIImageView!
+    @IBOutlet weak var appName: UILabel!
+    @IBOutlet weak var appDescription: UILabel!
+    @IBOutlet weak var downButton: UIButton!
+    @IBOutlet weak var gradeScore: UILabel!
+    @IBOutlet weak var gradeImage: UIImageView!
+    @IBOutlet weak var ageClass: UILabel!
+    @IBOutlet weak var gradeCount: UILabel!
+    @IBOutlet weak var ageDescription: UILabel!
+    
+    
+    @IBAction func appDownload(_ sender: Any) {
+    }
+    
+    @IBAction func appShare(_ sender: Any) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,8 +74,33 @@ class AppInfoViewController: UIViewController {
             return
         }
         
+        guard let cnt = self.appInfoData?.resultCount, cnt < 1 else{
+            print("결과가 없습니다.")
+            return
+        }
+        
+        guard let artworkUrl60 = self.appInfoData?.results?[cnt-1].artworkUrl60, let artworkUrl512 = self.appInfoData?.results?[cnt-1].artworkUrl512, let artworkUrl100 = self.appInfoData?.results?[cnt-1].artworkUrl100 else{
+            return
+        }
+        
+        let appImgUrl60:URL = URL(string: artworkUrl60)!
+        let appImgUrl512:URL = URL(string: artworkUrl512)!
+        let appImgUrl100:URL = URL(string: artworkUrl100)!
+        
+        DispatchQueue(label: "appImageDown").async {
+            if let appImage = try? Data(contentsOf: appImgUrl60){
+                self.appImage.image = UIImage(data: appImage)
+            }
+        }
         
         
+        
+        
+        
+        
+        
+        
+        //self.appImage.image =
         
         
         
