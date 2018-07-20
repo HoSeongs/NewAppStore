@@ -70,37 +70,55 @@ class AppInfoViewController: UIViewController {
     
     func setData(){
         
-        if (self.appInfoData == nil){
+        guard let appInfoData = self.appInfoData else{
             return
         }
         
-        guard let cnt = self.appInfoData?.resultCount, cnt < 1 else{
+        guard let cnt = appInfoData.resultCount, cnt > 0 else{
             print("결과가 없습니다.")
             return
         }
         
-        guard let artworkUrl60 = self.appInfoData?.results?[cnt-1].artworkUrl60, let artworkUrl512 = self.appInfoData?.results?[cnt-1].artworkUrl512, let artworkUrl100 = self.appInfoData?.results?[cnt-1].artworkUrl100 else{
-            return
+        
+        let index = cnt - 1
+        
+        //이미지 설정
+        if let artworkUrl60 = appInfoData.results?[index].artworkUrl60{
+//            DispatchQueue(label: "appImageDown").async {
+//                do{
+//                    if let appImage:Data = try Data(contentsOf: URL(string: artworkUrl60)!){
+//                        DispatchQueue.main.async {
+//                            self.appImage.image = UIImage(data: appImage)
+//                        }
+//                    }
+//                }catch let error{
+//                    print(error.localizedDescription)
+//                }
+//            }
         }
         
-        let appImgUrl60:URL = URL(string: artworkUrl60)!
-        let appImgUrl512:URL = URL(string: artworkUrl512)!
-        let appImgUrl100:URL = URL(string: artworkUrl100)!
-        
-        DispatchQueue(label: "appImageDown").async {
-            if let appImage = try? Data(contentsOf: appImgUrl60){
-                self.appImage.image = UIImage(data: appImage)
+        if let artworkUrl512 = appInfoData.results?[index].artworkUrl512{
+            DispatchQueue(label: "appImageDown").async {
+                do{
+                    if let appImage:Data = try Data(contentsOf: URL(string: artworkUrl512)!){
+                        DispatchQueue.main.async {
+                            self.appImage.image = UIImage(data: appImage)
+                        }
+                    }
+                }catch let error{
+                    print(error.localizedDescription)
+                }
             }
         }
         
+        if let artworkUrl100 = appInfoData.results?[index].artworkUrl100{
+            
+        }
+        
+        //앱 이름 설정
+        //if let appName = appInfoDate.
         
         
-        
-        
-        
-        
-        
-        //self.appImage.image =
         
         
         
